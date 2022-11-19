@@ -10,6 +10,7 @@ import {
   update,
 } from "firebase/database";
 import { useEffect, useState } from "react";
+import { toastSuccessNotify } from "./toastify";
 
 export const addUser = (info) => {
   const db = getDatabase(firebase);
@@ -21,6 +22,7 @@ export const addUser = (info) => {
     phone: info.phone,
     gender: info.gender,
   });
+  toastSuccessNotify("Successfully added");
 };
 
 // function writeUserData(userId, name, email, imageUrl) {
@@ -69,6 +71,7 @@ export const handleDelete = (id) => {
   const db = getDatabase(firebase);
   //   const userRef = ref(db, "users/");
   remove(ref(db, "users/" + id));
+  toastSuccessNotify("Successfully deleted");
 };
 
 //* EDİT */
@@ -78,5 +81,6 @@ export const upDataUser = (info) => {
   const userRef = ref(db, "users/");
   const updates = {};
   updates["users/" + info.id] = info;
+  toastSuccessNotify("Successfully edited");
   return update(ref(db), updates);
 };

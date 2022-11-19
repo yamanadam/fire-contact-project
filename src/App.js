@@ -2,6 +2,7 @@ import Contacts from "./components/contacts/Contacts";
 import FormComponent from "./components/form/FormComponent";
 import { useState } from "react";
 import { addUser, upDataUser } from "./components/utils/functions";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const initialState = {
@@ -32,6 +33,7 @@ function App() {
         handleSubmit={handleSubmit}
       />
       <Contacts showInfo={showInfo} />
+      <ToastContainer />
     </div>
   );
 }
