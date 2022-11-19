@@ -7,6 +7,7 @@ import {
   push,
   onValue,
   remove,
+  update,
 } from "firebase/database";
 import { useEffect, useState } from "react";
 
@@ -68,4 +69,14 @@ export const handleDelete = (id) => {
   const db = getDatabase(firebase);
   //   const userRef = ref(db, "users/");
   remove(ref(db, "users/" + id));
+};
+
+//* EDİT */
+
+export const upDataUser = (info) => {
+  const db = getDatabase(firebase);
+  const userRef = ref(db, "users/");
+  const updates = {};
+  updates["users/" + info.id] = info;
+  return update(ref(db), updates);
 };

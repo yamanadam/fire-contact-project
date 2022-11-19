@@ -8,11 +8,11 @@ import {
   TableBody,
   Paper,
 } from "@mui/material";
-import { useFetch, handleDelete } from "../utils/functions";
+import { useFetch, handleDelete, upDataUser } from "../utils/functions";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Contacts = () => {
+const Contacts = ({ showInfo }) => {
   const { loading, list } = useFetch();
   return (
     <div>
@@ -56,7 +56,11 @@ const Contacts = () => {
                     <DeleteIcon onClick={() => handleDelete(item.id)} />
                   </TableCell>
                   <TableCell align="center">
-                    <EditIcon />
+                    <EditIcon
+                      onClick={() =>
+                        showInfo(item.id, item.name, item.phone, item.gender)
+                      }
+                    />
                   </TableCell>
                 </TableRow>
               ))
