@@ -8,8 +8,12 @@ import {
   TableBody,
   Paper,
 } from "@mui/material";
+import { useFetch } from "../utils/functions";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Contacts = () => {
+  const { loading, list } = useFetch();
   return (
     <div>
       <h2 className="contact-header">Contacts</h2>
@@ -26,7 +30,37 @@ const Contacts = () => {
           </TableHead>
 
           <TableBody>
-            <TableRow></TableRow>
+            {loading ? (
+              <TableRow
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell colSpan={5} align="center">
+                  Loading
+                </TableCell>
+              </TableRow>
+            ) : list?.lenght === 0 ? (
+              <TableRow
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell colSpan={5} align="center">
+                  No Result Found
+                </TableCell>
+              </TableRow>
+            ) : (
+              list?.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell align="center">{item.name} </TableCell>
+                  <TableCell align="center">{item.phone} </TableCell>
+                  <TableCell align="center">{item.gender} </TableCell>
+                  <TableCell align="center">
+                    <DeleteIcon />
+                  </TableCell>
+                  <TableCell align="center">
+                    <EditIcon />
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>
