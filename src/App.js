@@ -1,6 +1,7 @@
 import Contacts from "./components/contacts/Contacts";
 import FormComponent from "./components/form/FormComponent";
 import { useState } from "react";
+import { addUser } from "./components/utils/functions";
 
 function App() {
   const initialState = {
@@ -11,6 +12,8 @@ function App() {
   const [info, setInfo] = useState(initialState);
   const handleSubmit = (e) => {
     e.preventDefault();
+    addUser(info);
+    setInfo(initialState);
   };
 
   return (
